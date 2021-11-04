@@ -1,0 +1,55 @@
+unmanaged;
+
+
+define behavior for ZI_ORDER_IS alias Order
+implementation in class zbp_i_order_is unique
+//late numbering
+lock master
+//authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _Oitem { create; }
+
+
+  field ( readonly ) OrderID, TotalPrice, CurrencyCode, Status, OrderDate;
+  field ( mandatory ) CustomerID;
+
+  mapping for zis_order control zsx_order_is
+  {
+    OrderID = order_id;
+    CustomerID = customer_id;
+    OrderDate = order_date;
+    TotalPrice = total_price;
+    CurrencyCode = currency_code;
+    ProductCount = product_count;
+    Status = status;
+  }
+
+}
+
+define behavior for ZI_ORDER_ITEM_IS alias Oitem
+implementation in class zbp_i_order_item_is unique
+//late numbering
+lock dependent by _Order
+//authorization dependent by _Order
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) OrderID, ProductID;
+  field ( mandatory ) Quantity;
+
+  association _Order;
+
+
+  mapping for zis_order_item control zsx_order_item_is
+  {
+    OrderID = order_id;
+    ProductID = product_id;
+    Quantity = quantity;
+    unit = unit;
+  }
+}

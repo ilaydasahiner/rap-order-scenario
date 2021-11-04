@@ -1,0 +1,54 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Order',
+                typeNamePlural: 'Orders',
+                title: { type: #STANDARD, label: 'Orders', value: 'OrderID' } },
+  presentationVariant: [{ sortOrder: [{ by: 'OrderID', direction:  #ASC }] }] }
+annotate view ZC_ORDER_IS with
+{
+
+  @UI.facet: [ { id:            'Order',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'General Info',
+                 position:      10 },
+               { id:            'Item',
+                 purpose:       #STANDARD,
+                 type:          #LINEITEM_REFERENCE,
+                 label:         'Products',
+                 position:      20,
+                 targetElement: '_Oitem'}]
+
+  @UI.lineItem: [{ position : 10, label: 'Order No' }]
+  @UI.selectionField: [{position: 10 }]
+  @UI : { identification: [{ position: 1, label: 'Order No'}] }
+  OrderID;
+
+  @UI.lineItem: [{ position : 20 }]
+  @UI.selectionField: [{position: 20 }]
+  @UI : { identification: [{ position: 2, label: 'Customer'}] }
+  CustomerID;
+
+  //  @UI : { identification: [{ position: 2, label: 'Customer' }] }
+  //  CustomerName;
+
+  @UI.lineItem: [{ position : 30 }]
+  @UI : { identification: [{ position: 3 }] }
+  OrderDate;
+
+  @UI.lineItem: [{ position : 40, criticality: 'TotalPriceCriticality', criticalityRepresentation: #WITHOUT_ICON}]
+  @UI : { identification: [{ position: 4, criticality: 'TotalPriceCriticality', criticalityRepresentation: #WITHOUT_ICON }] }
+  TotalPrice;
+
+  @UI.lineItem: [{ position : 50 }]
+  ProductCount;
+
+  @UI.selectionField: [{position: 30 }]
+  @UI : {  identification : [  { position : 5, label: 'Order Status', criticality: 'StatusCriticality'} ] }
+  Status;
+
+  @UI.lineItem: [{ position : 60 , label: 'Order Status', criticality: 'StatusCriticality'}]
+  //  @UI : { identification: [{ position: 5, label: 'Order Status', criticality: 'StatusCriticality' }] }
+  StatusText;
+
+}

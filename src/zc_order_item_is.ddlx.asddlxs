@@ -1,0 +1,27 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Item',
+                typeNamePlural: 'Items',
+                title: { type: #STANDARD, label:'Product' ,value: 'ProductName' }
+              }
+     }
+annotate view ZC_ORDER_ITEM_IS with
+{
+  @UI.facet: [ { id:            'Item',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'General Info',
+                 position:      10 }]
+
+  @UI.hidden: true
+  OrderID;
+
+  @UI: { lineItem: [ { position: 20, label: 'Product Name' }] }
+  ProductID;
+
+  @UI: { identification:  [ { position: 30 } ] }
+  ProductName;
+
+  @UI: { lineItem:       [ { position: 40 } ] }
+  Quantity;
+}

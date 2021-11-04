@@ -1,0 +1,9 @@
+@EndUserText.label: 'Servis Definition for ZC_ORDER_IS'
+define service ZUI_ORDER_IS {
+  expose ZC_ORDER_IS;
+  expose ZC_ORDER_ITEM_IS;
+  expose I_Currency as Currency;
+  expose I_UnitOfMeasure as Unit;
+  expose ZVH_CUSTOMER_IS as CustomerVH;
+  expose ZVH_ORDER_STATUS_IS as OrderStatusVH;
+}
